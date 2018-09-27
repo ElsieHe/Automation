@@ -1,17 +1,58 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-    <h3>测试平台<h3>
-    <form action="/login_action" method="get">
-      账号:<input type="text" name="username"/><br>
-      密码:<input type="password" name="password"/><br>
-        {{ error }}<br>
-      <input type="submit" value="Submit"/>
-</form>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
-</body>
+    <title>Signin Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://v4.bootcss.com/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="https://v4.bootcss.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet">
+  </head>
+
+  <body class="text-center">
+    <form class="form-signin" method="post" action="/login_action/">
+      <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">测试平台</h1>
+      <label for="inputEmail" class="sr-only">Username</label>
+      <input type="text" name="username" id="username" class="form-control" placeholder="username" required>
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+      <div class="checkbox mb-3">
+          {{ error }}
+          {% csrf_token %}
+        <label>
+          <input type="checkbox" value="remember-me"> Remember me
+        </label>
+      </div>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+      <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
+    </form>
+  </body>
 </html>
+{#{% comment %}#}
+{#<!DOCTYPE html>#}
+{#<html lang="en">#}
+{#<head>#}
+{#    <meta charset="UTF-8">#}
+{#    <title>Title</title>#}
+{#    <h3>测试平台<h3>#}
+{#    <form action="/login_action/" method="post">#}
+{#      账号:<input type="text" name="username"/><br>#}
+{#      密码:<input type="password" name="password"/><br>#}
+{#        {{ error }}<br>#}
+{#        {% csrf_token %}#}
+{#      <input type="submit" value="Submit"/>#}
+{##}
+{#</form>#}
+{#</head>#}
+{#<body>#}
+{##}
+{#</body>#}
+{#</html>{% endcomment %}#}
