@@ -8,12 +8,14 @@
     <link rel="icon" href="../../../../favicon.ico">
 
     <title>Signin Template for Bootstrap</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/signin.css" %}">
 
-    <!-- Bootstrap core CSS -->
+{% comment %}    <!-- Bootstrap core CSS -->
     <link href="https://v4.bootcss.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Custom styles for this template -->
-    <link href="https://v4.bootcss.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet">
+    <link href="https://v4.bootcss.com/docs/4.0/examples/sign-in/signin.css" rel="stylesheet">{% endcomment %}
   </head>
 
   <body class="text-center">
@@ -27,9 +29,6 @@
       <div class="checkbox mb-3">
           {{ error }}
           {% csrf_token %}
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
       <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
