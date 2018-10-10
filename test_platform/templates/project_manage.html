@@ -1,231 +1,88 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../../../favicon.ico">
+{% extends 'base.html' %}
+{% block title %}编辑加项目{% endblock %}
 
-    <title>Dashboard Template for Bootstrap</title>
-    {% load pagetag %}
-    <!-- Bootstrap core CSS -->
-    <link href="https://v4.bootcss.com/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="https://v4.bootcss.com/docs/4.0/examples/dashboard/dashboard.css" rel="stylesheet">
-</head>
-
-<body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">测试平台</a>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link ml-auto" href="#">{{ user }}</a>
-        </li>
-    </ul>
-    <ul class="navbar-nav px-3">
-        <li class="nav-item">
-            <a class="nav-link ml-auto" href="/logout/">退出</a>
-        </li>
-    </ul>
-    {% comment %}      <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-          <a class="nav-link" href="/logout/">退出</a>
-        </li>
-      </ul>{% endcomment %}
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/view_project/">
-                            <span data-feather="file"></span>
-                            项目管理 <span class="sr-only">(current)</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="shopping-cart"></span>
-                            模块管理
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="users"></span>
-                            用例管理
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="bar-chart-2"></span>
-                            任务管理
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="layers"></span>
-                            MockServer
-                        </a>
-                    </li>
-                </ul>
-           </div>
-        </nav>
-
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-
-
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <h1 class="h2">项目管理</h1>
-            <div class="btn-toolbar mb-2 mb-md-0">
-              <div class="btn-group mr-2">
-                  <a href="/add_project/"><button class="btn btn-sm btn-primary">添加</button></a>
-              </div>
+{% block content %}
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">项目管理</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+            <div class="btn-group mr-2">
+                <a href="/add_project/">
+                   <i class="fa fa-plus-square" style="font-size:23px" aria-hidden="true"></i>
+                </a>
             </div>
-          </div>
-        <div class="row">
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>名称</th>
-                        <th>描述</th>
-                        <th>状态</th>
-                        <th>创建时间</th>
-                        <th>操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        {% for pitem in projectlist %}
-                            <tr>
-                                <td>{{ pitem.id }}</td>
-                                <td>{{ pitem.name }}</td>
-                                <td>{{ pitem.description }}</td>
-                                <td>{{ pitem.status }}</td>
-                                <td>{{ pitem.creationtime|date:"Y-m-d H:i:s" }}</td>
-                                <td>
-                                    <a href="/edit_project/{{pitem.id }}"><button class="btn btn-sm btn-primary">编辑</button></a>
-                                    <a href="/del_project/?id={{ pitem.id }}"><button class="btn btn-sm btn-primary">删除</button></a>
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-
-                </table>
-            </div>
-       <nav aria-label="Page navigation">
-            <ul class="pagination">
-                {% if projectlist.has_previous %}
-                    <li class="page-item">
-                    <a class="page-link" href="?page={{ projectlist.previous_page_number }}" aria-label="Previous">
-                        <span aria-hidden="false">&laquo;</span>
-                    </a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" >
-                            <span aria-hidden="false">&laquo;</span>
-                        </a>
-                    </li>
-                {% endif %}
-            {% for pg in projectlist.paginator.page_range %}
-            {% if projectlist.number == pg %}
-                <li class="page-item active"><a class="page-link" href="?page={{ pg }}">{{ pg }}</a></li>
-            {% else %}
-               <li class="page-item"><a class="page-link" href="?page={{ pg }}">{{ pg }}</a> </li>
-            {% endif %}
-            {% endfor %}
-{% comment %}
-                {% for pg in projectlist.paginator.page_range %}
-                    {% circle_page projectlist.number pg %}
-                {% endfor %}{% endcomment %}
-                {% if projectlist.has_next %}
-                    <li class="page-item">
-                    <a class="page-link" href="?page={{ projectlist.next_page_number }}" aria-label="Next">
-                        <span aria-hidden="false">&raquo;</span>
-                    </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" >
-                            <span aria-hidden="false">&raquo;</span>
-                        </a>
-                    </li>
-                {% endif %}
-         </ul>
-        </nav>
-
-{% comment %}          <div class="pagination">
-            <span class="step-links">
-                {% if projectlist.has_previous %}
-                    <a href="?page={{ projectlist.previous_page_number }}">previous</a>
-                {% endif %}
-                <span class="current">
-            Page{{ projectlist.number }} of {{ projectlist.paginator.num_pages }}.
-            </span>
-                {% if projectlist.has_next %}
-
-                    <a href="?page={{ projectlist.next_page_number }}">next</a>
-                {% endif %}
-            </span>
-            </div>{% endcomment %}
-
-
         </div>
-        </main>
     </div>
-</div>
+    <div class="row">
+        <div class="table-responsive">
+            <table id="projecttable"  class="table table-striped table-sm table-condensed">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th >名称</th>
+                    <th >描述</th>
+                    <th>状态</th>
+                    <th>创建时间</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for pitem in projectlist %}
+                    <tr>
+                        <td>{{ pitem.id }}</td>
+                        <td>{{ pitem.name }}</td>
+                        <td>{{ pitem.description }}</td>
+                        <td>{{ pitem.status }}</td>
+                        <td>{{ pitem.creationtime|date:"Y-m-d H:i:s" }}</td>
+                        <td>
+                            <a href="/edit_project/{{ pitem.id }}"><i class="fa fa-pencil fa-fw"></i></a>
+                            <a href="/del_project/?id={{ pitem.id }}"><i class="fa fa-trash-o fa-fw"></i></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
 
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="https://v4.bootcss.com/assets/js/vendor/popper.min.js"></script>
-<script src="https://v4.bootcss.com/dist/js/bootstrap.min.js"></script>
-
-<!-- Icons -->
-<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-<script>
-    feather.replace()
-</script>
-
-<!-- Graphs -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
-<script>
-    var ctx = document.getElementById("myChart");
-    var myChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-            datasets: [{
-                data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
-                lineTension: 0,
-                backgroundColor: 'transparent',
-                borderColor: '#007bff',
-                borderWidth: 4,
-                pointBackgroundColor: '#007bff'
-            }]
-        },
-        options: {
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: false
-                    }
-                }]
-            },
-            legend: {
-                display: false,
-            }
-        }
-    });
-</script>
-</body>
-</html>
+            </table>
+        </div>
+{#        <nav aria-label="Page navigation">#}
+{#            <ul class="pagination">#}
+{#                {% if projectlist.has_previous %}#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="?page={{ projectlist.previous_page_number }}" aria-label="Previous">#}
+{#                            <span aria-hidden="false">&laquo;</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% else %}#}
+{#                    <li class="page-item disabled">#}
+{#                        <a class="page-link">#}
+{#                            <span aria-hidden="false">&laquo;</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#                {% for pg in projectlist.paginator.page_range %}#}
+{#                    {% if projectlist.number == pg %}#}
+{#                        <li class="page-item active"><a class="page-link" href="?page={{ pg }}">{{ pg }}</a></li>#}
+{#                    {% else %}#}
+{#                        <li class="page-item"><a class="page-link" href="?page={{ pg }}">{{ pg }}</a></li>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#                {% comment %}#}
+{#                {% for pg in projectlist.paginator.page_range %}#}
+{#                    {% circle_page projectlist.number pg %}#}
+{#                {% endfor %}{% endcomment %}#}
+{#                {% if projectlist.has_next %}#}
+{#                    <li class="page-item">#}
+{#                        <a class="page-link" href="?page={{ projectlist.next_page_number }}" aria-label="Next">#}
+{#                            <span aria-hidden="false">&raquo;</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% else %}#}
+{#                    <li class="page-item disabled">#}
+{#                        <a class="page-link">#}
+{#                            <span aria-hidden="false">&raquo;</span>#}
+{#                        </a>#}
+{#                    </li>#}
+{#                {% endif %}#}
+{#            </ul>#}
+{#        </nav>#}
+    </div>
+{% endblock %}

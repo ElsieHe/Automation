@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
+
+    <title>{% block title %}测试平台{% endblock %}</title>
+    {% load pagetag %}
+    {% load static %}
+    <!-- Bootstrap core CSS -->
+    <link href="https://v4.bootcss.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static "css/dataTables.bootstrap4.min.css" %}">
+
+    <!--font awesome icons-->
+    <link rel="stylesheet" href="{% static "font/font-awesome/4.7.0/css/font-awesome.min.css"%}">
+    <!--jquery js-->
+     <script type="text/javascript" language="javascript" src="{% static "js/jquery-3.3.1.js"%}"></script>
+     <script type="text/javascript" language="javascript" src="{% static "js/jquery.dataTables.min.js"%}"></script>
+    <script type="text/javascript" language="javascript" src="{% static "js/dataTables.bootstrap4.min.js"%}"></script>
+
+	<script type="text/javascript" class="init">
+
+$(document).ready(function() {
+	$('#projecttable').DataTable();
+} );
+
+	</script>
+    <!-- Custom styles for this template -->
+    <link href="https://v4.bootcss.com/docs/4.0/examples/dashboard/dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">测试平台</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+            <a class="nav-link ml-auto" href="#">{{ user }}</a>
+        </li>
+    </ul>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item">
+            <a class="nav-link ml-auto" href="/logout/">退出</a>
+        </li>
+    </ul>
+    {% comment %}      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="/logout/">退出</a>
+        </li>
+      </ul>{% endcomment %}
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+            <div class="sidebar-sticky">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/view_project/">
+                            <span data-feather="file"></span>
+                            项目管理 <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="shopping-cart"></span>
+                            模块管理
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="users"></span>
+                            用例管理
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="bar-chart-2"></span>
+                            任务管理
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <span data-feather="layers"></span>
+                            MockServer
+                        </a>
+                    </li>
+                </ul>
+           </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+</div>
+
+
+{% block css %}
+{% endblock %}
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+{% block js %}
+{% endblock %}
+</body>
+</html>

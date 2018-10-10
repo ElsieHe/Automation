@@ -44,16 +44,18 @@ def login_action(request):
 
 @login_required
 def view_project(request):
+    # Projectlist = Project.objects.all().order_by('-creationtime')
+    # paginator = Paginator(Projectlist, 15, 2)
+    # page = request.GET.get('page')
+    # try:
+    #     contacts =  paginator.page(page)
+    # except PageNotAnInteger:
+    #     contacts = paginator.page(1)
+    # except EmptyPage:
+    #     contacts = paginator.page(paginator.num_pages)
+    # return render(request, "project_manage.html", {"projectlist":contacts})
     Projectlist = Project.objects.all().order_by('-creationtime')
-    paginator = Paginator(Projectlist, 15, 2)
-    page = request.GET.get('page')
-    try:
-        contacts =  paginator.page(page)
-    except PageNotAnInteger:
-        contacts = paginator.page(1)
-    except EmptyPage:
-        contacts = paginator.page(paginator.num_pages)
-    return render(request, "project_manage.html", {"projectlist":contacts})
+    return render(request,"project_manage.html",{"projectlist":Projectlist})
 
 
 @login_required
@@ -101,7 +103,7 @@ def add_project(request):
 @login_required
 def del_project(request):
     id = request.GET.get("id")
-    Project.objects.filter(id=id).delete()
+    Project.objects.get(id=id).delete()
     return HttpResponseRedirect('/view_project/')
 
 def logout(request):
