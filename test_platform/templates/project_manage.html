@@ -6,12 +6,13 @@
         <h1 class="h2">项目管理</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <a href="/add_project/">
+                <a href="/management/add_project/">
                    <i class="fa fa-plus-square" style="font-size:23px" aria-hidden="true"></i>
                 </a>
             </div>
         </div>
     </div>
+    {% if type == "list" %}
     <div class="row">
         <div class="table-responsive">
             <table id="projecttable"  class="table table-striped table-sm table-condensed">
@@ -34,8 +35,8 @@
                         <td>{{ pitem.status }}</td>
                         <td>{{ pitem.creationtime|date:"Y-m-d H:i:s" }}</td>
                         <td>
-                            <a href="/edit_project/{{ pitem.id }}"><i class="fa fa-pencil fa-fw"></i></a>
-                            <a href="/del_project/?id={{ pitem.id }}"><i class="fa fa-trash-o fa-fw"></i></a>
+                            <a href="/management/edit_project/{{ pitem.id }}"><i class="fa fa-pencil fa-fw"></i></a>
+                            <a href="/management/del_project/{{ pitem.id }}"><i class="fa fa-trash-o fa-fw"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -85,4 +86,67 @@
 {#            </ul>#}
 {#        </nav>#}
     </div>
+    {% endif %}
+    {% if type == "edit" %}
+           <div class="row">
+
+        <div  class="col-md-6 col-md-offset-2">
+
+            <form  class=edit_project" action="/management/edit_project/{{ project_obj.id }}/" method="post">
+             {% csrf_token %}
+            <div  class="form-group">
+                <label for="name">名称：</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ project_obj.name }}">
+            </div>
+            <div  class="form-group">
+                <label for="description">说明：</label>
+                <textarea class="form-control" id="description" name="description">{{ project_obj.description }}</textarea>
+            </div>
+            <div  class="form-group">
+                <label for="status">状态：</label>
+                <input type="checkbox" id="status" name="status"
+                {% if project_obj.status %}
+                        checked="checked"
+                {% endif %}
+                >
+
+            </div>
+            <input class="btn btn-primary btn-sm" type="submit" value='提交'>
+            <input class="btn btn-primary btn-sm" type="reset" value='重置'>
+
+            </form>
+        </div>
+    </div>
+    {% endif %}
+    {% if type == "add" %}
+           <div class="row">
+
+        <div  class="col-md-6 col-md-offset-2">
+
+            <form  class=add_project" action="/management/add_project/" method="post">
+             {% csrf_token %}
+            <div  class="form-group">
+                <label for="name">名称：</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ project_obj.name }}">
+            </div>
+            <div  class="form-group">
+                <label for="description">说明：</label>
+                <textarea class="form-control" id="description" name="description">{{ project_obj.description }}</textarea>
+            </div>
+            <div  class="form-group">
+                <label for="status">状态：</label>
+                <input type="checkbox" id="status" name="status"
+                {% if project_obj.status %}
+                        checked="checked"
+                {% endif %}
+                >
+
+            </div>
+            <input class="btn btn-primary btn-sm" type="submit" value='提交'>
+            <input class="btn btn-primary btn-sm" type="reset" value='重置'>
+
+            </form>
+        </div>
+    </div>
+    {% endif %}
 {% endblock %}
