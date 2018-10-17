@@ -10,14 +10,26 @@ class ProjectForm(ModelForm):
         widgets = {
               'name': TextInput(),
               'description': Textarea(),
-         #     'status': CheckboxInput(),
+              'status': CheckboxInput(),
         # #     'creationtime' : Textarea,
           }
         labels = {
-            'name': _('Writer'),
-            'description':_('description'),
+            'name': _('名称'),
+            'description':_('描述'),
+            'status':_('状态'),
         }
         help_texts = {
-            'name': _('project name.'),
-            'description':_('project description'),
+            'name': _('***项目名称'),
+            'description':_('***项目说明'),
+        }
+        error_messages = {
+            '__all__': {
+
+            },
+            'name': {
+                'required': '项目不能为空',
+            },
+            'description':{
+                'required':'说明不能为空',
+            }
         }
