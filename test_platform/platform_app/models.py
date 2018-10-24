@@ -1,6 +1,7 @@
 from django.db import models
 
 
+
 # Create your models here.
 class Project(models.Model):
     name = models.CharField("名称",max_length=100, blank=False,default="")
@@ -11,6 +12,8 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
 
 class Module(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)

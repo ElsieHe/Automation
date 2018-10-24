@@ -2,6 +2,10 @@
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+.xml
+.vscode
+.idea
+.json
 
 # Python:
 *.py[cod]

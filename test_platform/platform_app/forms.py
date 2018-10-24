@@ -1,5 +1,5 @@
 from django.forms import ModelForm, Textarea, TextInput,CheckboxInput
-from platform_app.models import Project
+from platform_app.models import Project, Module
 from django.utils.translation import gettext_lazy as _
 
 class ProjectForm(ModelForm):
@@ -33,3 +33,12 @@ class ProjectForm(ModelForm):
                 'required':'说明不能为空',
             }
         }
+
+
+
+class ModuleForm(ModelForm):
+    class Meta:
+        model = Module
+        exclude = ['creationtime']
+
+
