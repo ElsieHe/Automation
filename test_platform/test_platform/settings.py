@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'platform_app.apps.UserAppConfig',
     'user_app.apps.UserAppConfig',
+    'interface_app.apps.InterfaceAppConfig',
     'bootstrap4'
 ]
 

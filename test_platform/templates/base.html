@@ -34,8 +34,8 @@ $(document).ready(function() {
 </head>
 
 <body>
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">测试平台</a>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">GTATTesting</a>
     <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
     <ul class="navbar-nav ml-auto">
         <li class="nav-item">
@@ -73,19 +73,19 @@ $(document).ready(function() {
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-selected="true">
+                        <a class="nav-link"  href="/interface/case_manage/" >
                             <span data-feather="users"></span>
                             用例管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#" role="tab" aria-selected="true"> 
+                        <a class="nav-link" href="/interface/task_manage/">
                             <span data-feather="bar-chart-2"></span>
                             任务管理
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="tab" aria-selected="true">
+                        <a class="nav-link" href="#" >
                             <span data-feather="layers"></span>
                             MockServer
                         </a>
@@ -93,7 +93,7 @@ $(document).ready(function() {
                 </ul>
            </div>
         </nav>
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
                 {% block content %} {% endblock %}
         </main>
 

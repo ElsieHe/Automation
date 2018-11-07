@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import login_required
-
 from django.http import HttpResponseRedirect
 from platform_app.models import Project, Module
 from django.forms import modelformset_factory
