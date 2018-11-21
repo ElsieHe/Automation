@@ -7,12 +7,13 @@ from django.shortcuts import render
 from datetime import datetime
 from django.utils.timezone import utc
 # Create your views here.
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
     return render(request, "index.html")
 
-
+@csrf_exempt
 def login_action(request):
     """
 

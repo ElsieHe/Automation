@@ -8,7 +8,7 @@
         <h1 class="h2">用例列表</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
             <div class="btn-group mr-2">
-                <a href="/interface/debug/">
+                <a href="/interface/add_case/">
                    <i class="fa fa-bug" style="font-size:23px" aria-hidden="true"></i>
                 </a>
             </div>
@@ -28,16 +28,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% for pitem in projectlist %}
+                {% for case in testcases  %}
                     <tr>
-                        <td>{{ pitem.id }}</td>
-                        <td>{{ pitem.name }}</td>
-                        <td>{{ pitem.description }}</td>
-                        <td>{{ pitem.status }}</td>
-                        <td>{{ pitem.creationtime|date:"Y-m-d H:i:s" }}</td>
+                        <td>{{ case.id }}</td>
+                        <td>{{ case.name }}</td>
+                        <td>{{ case.url }}</td>
+                        <td>{{ case.req_method }}</td>
+                        <td>{{ case.create_time|date:"Y-m-d H:i:s" }}</td>
                         <td>
-                            <a href="/management/edit_project/{{ pitem.id }}"><i class="fa fa-pencil fa-fw"></i></a>
-                            <a href="/management/del_project/{{ pitem.id }}"><i class="fa fa-trash-o fa-fw"></i></a>
+                            <a href="/interface/debug_case/{{case.id}}/"><i class="fa fa-bug"fa-fw"></i></a>
+                            <a href="/interface/delete_project/{{case.id}}/"><i class="fa fa-trash-o fa-fw"></i></a>
                         </td>
                     </tr>
                 {% endfor %}
@@ -49,14 +49,24 @@
   {% endif %}
 
         <!-- 调试页面 -->
-        {% if type == 'debug'%}
+        {% if type == 'add'%}
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="row">
-                {% block api_debug %}
+                {% block add_case %}
 
                 {% endblock %}
             </div>
 
+        </div>
+        {% endif %}
+            <!-- 添加（调试）用例页面 -->
+        {% if type == 'debug'%}
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="row">
+                {% block debug_case %}
+                    <!--debug_case.html-->
+                {% endblock %}
+            </div>
         </div>
         {% endif %}
 {% endblock %}
